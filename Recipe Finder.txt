@@ -1,65 +1,630 @@
-abort یعنی چه؟
+🟢 JavaScript Methods
+🔥 1. abort()
+
+📌 ساختار:
+
 searchController.abort();
 
-یعنی
+💡 معنی:
 
-درخواست قبلی را لغو کن.
+درخواست fetch که هنوز تمام نشده را لغو می‌کند.
 
 مثلاً:
 
-کاربر نوشت
+کاربر سرچ می‌کند:
 
-chi
+pizza
 
-هنوز جواب نیامده.
+درخواست ارسال می‌شود:
 
-بعد سریع نوشت
+API → pizza
+
+اما قبل از اینکه جواب بیاید، کاربر می‌نویسد:
 
 chicken
 
-پس دیگر درخواست
+پس درخواست قبلی دیگر لازم نیست.
 
-chi
-
-به درد نمی‌خورد.
-
-لغوش می‌کنیم.
-new AbortController()
-signal چیست؟
-signal: searchController.signal
-
-یعنی
-
-اگر بعداً
+با:
 
 abort()
 
-صدا زده شد...
+درخواست قبلی را متوقف می‌کنیم.
+
+🎯 کاربرد:
+
+جلوگیری از ارسال درخواست‌های اضافی.
+
+مثلاً در:
+
+Search
+Autocomplete
+Live Search
+🔥 2. AbortController()
+
+📌 ساختار:
+
+let searchController = new AbortController();
+
+💡 معنی:
+
+یک کنترل‌کننده برای مدیریت یک عملیات قابل لغو می‌سازد.
+
+یعنی به ما یک دکمه Stop برای fetch می‌دهد.
+
+مثال:
+
+searchController = new AbortController();
+
+اینجا یک کنترلر جدید ساختیم.
+
+بعد:
+
+fetch(url,{
+    signal: searchController.signal
+})
+
+یعنی:
+
+این fetch را به این کنترلر وصل کن.
+
+اگر بعداً:
+
+searchController.abort();
+
+اجرا شد:
 
 این fetch متوقف شود.
-error یک Object است.
-name یکی از Propertyهای آن Object است.
-error.name یعنی نام نوع خطا.
-ما با بررسی آن تشخیص می‌دهیم که خطا واقعی است یا فقط به خاطر abort() ایجاد شده است.
 
-e.key         // کلیدی که زده شده
-e.code        // کد فیزیکی کلید (مثل KeyA)
-e.ctrlKey     // آیا Ctrl نگه داشته شده؟
-e.shiftKey    // آیا Shift نگه داشته شده؟
-e.altKey      // آیا Alt نگه داشته شده؟
-e.target      // عنصری که رویداد روی آن اتفاق افتاده
-e.type        // نوع رویداد (keydown)
+🔥 3. signal
 
-target
+📌 ساختار:
 
-closest()
-slice 
-some
-map
-join
-Set فقط مقادیر یکتا را نگه می‌دارد.
-unshift() چیست؟
-remove
-pop
-dataset
-delete چیست؟
+signal: searchController.signal
+
+💡 معنی:
+
+رابط بین:
+
+AbortController
+        |
+        |
+      signal
+        |
+        |
+      fetch
+
+است.
+
+یعنی:
+
+"اگر controller گفت stop، این fetch هم متوقف شود."
+
+🔥 4. error.name
+
+📌 ساختار:
+
+error.name
+
+💡 معنی:
+
+اسم نوع خطایی که اتفاق افتاده را می‌دهد.
+
+مثلاً:
+
+catch(error){
+
+console.log(error.name);
+
+}
+
+ممکن است خروجی:
+
+AbortError
+
+باشد.
+
+یعنی:
+
+خطا به خاطر abort اتفاق افتاده.
+
+مثال:
+
+if(error.name === "AbortError"){
+    return;
+}
+
+یعنی:
+
+اگر فقط درخواست را خودمان لغو کردیم، کاری نکن.
+
+🟢 Keyboard Event
+🔥 5. e.key
+
+📌 ساختار:
+
+e.key
+
+💡 معنی:
+
+کلیدی که کاربر فشار داده.
+
+مثال:
+
+کاربر Enter می‌زند:
+
+if(e.key === "Enter"){
+    search();
+}
+🔥 6. e.code
+
+📌 ساختار:
+
+e.code
+
+💡 معنی:
+
+نام فیزیکی کلید روی کیبورد.
+
+مثال:
+
+فشار دادن A:
+
+e.code
+
+خروجی:
+
+KeyA
+
+تفاوت:
+
+e.key
+
+مقدار واقعی:
+
+a
+
+اما:
+
+e.code
+
+جای کلید:
+
+KeyA
+🔥 7. e.ctrlKey
+
+📌 ساختار:
+
+e.ctrlKey
+
+💡 معنی:
+
+بررسی می‌کند آیا Ctrl نگه داشته شده یا نه.
+
+مثال:
+
+if(e.ctrlKey){
+console.log("Ctrl pressed")
+}
+🔥 8. e.shiftKey
+e.shiftKey
+
+بررسی می‌کند Shift فعال است یا نه.
+
+🔥 9. e.altKey
+e.altKey
+
+بررسی می‌کند Alt نگه داشته شده یا نه.
+
+🔥 10. e.target
+
+📌 ساختار:
+
+e.target
+
+💡 معنی:
+
+المانی که Event روی آن اتفاق افتاده.
+
+مثال:
+
+HTML:
+
+<button>
+Delete
+</button>
+
+JS:
+
+button.addEventListener("click",(e)=>{
+
+console.log(e.target);
+
+})
+
+خروجی:
+
+همان button.
+
+🎯 کاربرد:
+
+وقتی چند عنصر مشابه داریم.
+
+مثلاً:
+
+لیست محصولات:
+
+Product 1
+Product 2
+Product 3
+
+با target می‌فهمیم کدام کلیک شده.
+
+🔥 11. e.type
+
+📌 ساختار:
+
+e.type
+
+💡 معنی:
+
+نوع Event را نشان می‌دهد.
+
+مثال:
+
+keydown
+click
+input
+submit
+🟢 DOM Methods
+🔥 12. closest()
+
+📌 ساختار:
+
+element.closest(selector)
+
+💡 معنی:
+
+نزدیک‌ترین والد با آن کلاس یا تگ را پیدا می‌کند.
+
+مثال:
+
+HTML:
+
+<div class="card">
+
+<button>
+Delete
+</button>
+
+</div>
+
+JS:
+
+button.closest(".card")
+
+نتیجه:
+
+<div class="card">
+
+🎯 کاربرد:
+
+حذف کارت، پیدا کردن parent.
+
+🟢 Array Methods
+🔥 13. slice()
+
+📌 ساختار:
+
+array.slice(start,end)
+
+💡 معنی:
+
+یک بخش از Array را کپی می‌کند.
+
+مثال:
+
+let foods=[
+"Pizza",
+"Burger",
+"Pasta",
+"Rice"
+]
+
+
+foods.slice(0,2)
+
+خروجی:
+
+[
+"Pizza",
+"Burger"
+]
+
+⚠️ Array اصلی تغییر نمی‌کند.
+
+🎯 کاربرد:
+
+Load More
+
+مثلاً:
+
+recipes.slice(0,6)
+
+یعنی:
+
+فقط 6 رسپی اول را نشان بده.
+
+🔥 14. some()
+
+📌 ساختار:
+
+array.some(callback)
+
+💡 معنی:
+
+بررسی می‌کند آیا حداقل یک مورد وجود دارد یا نه.
+
+مثال:
+
+favorites.some(
+item=>item.id===5
+)
+
+اگر پیدا کند:
+
+true
+
+اگر نه:
+
+false
+
+🎯 کاربرد:
+
+چک کردن Favorite
+
+🔥 15. map()
+
+📌 ساختار:
+
+array.map()
+
+💡 معنی:
+
+روی تمام اعضای Array حرکت می‌کند و یک Array جدید می‌سازد.
+
+مثال:
+
+let names =
+recipes.map(recipe=>recipe.strMeal)
+
+قبل:
+
+[
+{
+strMeal:"Pizza"
+},
+{
+strMeal:"Burger"
+}
+]
+
+بعد:
+
+[
+"Pizza",
+"Burger"
+]
+🔥 16. join()
+
+📌 ساختار:
+
+array.join(separator)
+
+💡 معنی:
+
+Array را تبدیل به String می‌کند.
+
+مثال:
+
+[
+"Egg",
+"Milk",
+"Rice"
+].join(",")
+
+نتیجه:
+
+Egg,Milk,Rice
+
+کاربرد:
+
+ساخت HTML:
+
+.map()
+.join("")
+🔥 17. Set
+
+📌 ساختار:
+
+new Set(array)
+
+💡 معنی:
+
+فقط مقدارهای تکراری را حذف می‌کند.
+
+مثال:
+
+[
+"USA",
+"USA",
+"Italy"
+]
+
+با Set:
+
+USA
+Italy
+
+کاربرد:
+
+ساخت Category های Unique
+
+🔥 18. unshift()
+
+📌 ساختار:
+
+array.unshift(value)
+
+💡 معنی:
+
+یک مقدار را به اول Array اضافه می‌کند.
+
+مثال:
+
+let history=[
+"pizza",
+"burger"
+]
+
+
+history.unshift("chicken")
+
+نتیجه:
+
+[
+"chicken",
+"pizza",
+"burger"
+]
+
+کاربرد:
+
+Search History
+
+جدیدترین سرچ همیشه اول باشد.
+
+🔥 19. pop()
+
+📌 ساختار:
+
+array.pop()
+
+💡 معنی:
+
+آخرین مقدار Array را حذف می‌کند.
+
+مثال:
+
+[
+1,
+2,
+3
+]
+
+بعد:
+
+pop()
+
+نتیجه:
+
+[
+1,
+2
+]
+
+کاربرد:
+
+محدود کردن History:
+
+مثلاً فقط 5 سرچ آخر.
+
+🔥 20. remove()
+
+📌 نکته:
+
+در JavaScript چیزی به نام:
+
+array.remove()
+
+وجود ندارد.
+
+برای حذف:
+
+از:
+
+remove()
+
+برای DOM استفاده می‌کنیم.
+
+مثال:
+
+card.remove();
+
+یعنی:
+
+این عنصر را از صفحه حذف کن.
+
+🔥 21. dataset
+
+📌 ساختار:
+
+HTML:
+
+<button data-id="123">
+View
+</button>
+
+JS:
+
+button.dataset.id
+
+خروجی:
+
+123
+
+💡 معنی:
+
+خواندن اطلاعاتی که خودمان داخل HTML ذخیره کردیم.
+
+کاربرد:
+
+ذخیره ID:
+
+data-id="recipe123"
+
+بعد:
+
+recipe.id
+
+را پیدا می‌کنیم.
+
+🔥 22. delete
+
+📌 ساختار:
+
+delete object.property
+
+💡 معنی:
+
+یک Property از Object حذف می‌کند.
+
+مثال:
+
+let user={
+name:"Ali",
+age:15
+}
+
+
+delete user.age;
+
+نتیجه:
+
+{
+name:"Ali"
+}
+
+🎯 کاربرد:
+
+حذف اطلاعات از Object.
