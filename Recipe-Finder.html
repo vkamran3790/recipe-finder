@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../se 9/Recipe-Finder.css">
+    <style>
+        .div {
+            width: 300px;
+            height: 130px;
+            background-color: rgba(201, 47, 178, 0.833);
+            border-radius: 50px;
+            border: 3px solid rgb(226, 71, 164);
+        }
+
+        .p {
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="div">
+        <p class="p">1405/4/23</p>
+        <p class="p">Recipe Finder</p>
+    </div>
+    <hr>
+
+    <h1>Recipe Finder 🍔</h1>
+
+    <!-- favorite and favorite count -->
+
+    <a href="../se 9/favorites.html">❤️ Favorites<p id="favoritesCount">❤️ : 0</p></a>
+
+    <!-- search -->
+
+    <div class="search-wrapper">
+        <input id="searchInput" type="text" placeholder="Search food...">
+
+        <!-- autocomplete(box) -->
+
+        <div class="autocomplete-box"></div>
+
+    </div>
+
+    <!-- search btn -->
+
+    <button id="searchBtn">Search</button>
+
+    <!-- random btn -->
+
+    <button id="randomBtn">🎲 Surprise Me</button>
+
+    <!-- history(search) -->
+
+    <div class="search-history">
+        <div id="historyContainer"></div>
+    </div>
+
+    <!-- delete history(btn) -->
+
+    <button id="clearHistoryBtn">
+        🗑 Clear History
+    </button>
+
+    <!-- categoryFilter -->
+
+    <select id="categoryFilter">
+        <option value="">All Categories</option>
+    </select>
+
+    <!-- countryFilter -->
+
+    <select id="countryFilter">
+        <option value="">All Countries</option>
+    </select>
+
+    <!-- sort btn -->
+
+    <select id="sortSelect">
+        <option value="">Sort By</option>
+
+        <option value="az">A - Z</option>
+
+        <option value="za">Z - A</option>
+    </select>
+
+    <!-- load More-->
+
+    <button id="loadMoreBtn">Load More</button>
+
+    <!-- theme btn -->
+
+    <button id="themeBtn">
+        🌙 Dark Mode
+    </button>
+
+    <!-- Recipe container -->
+
+    <div class="recipes-container"></div>
+
+    <!-- error -->
+
+    <div class="error"></div>
+
+    <!-- modal -->
+
+    <div class="modal"></div>
+
+    <a href="../se 9/meal-planner.html">Weekly Meal Planner 🍽️</a>
+
+    <script src="../se 9/Recipe-Finder.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+abort یعنی چه؟
+searchController.abort();
+
+یعنی
+
+درخواست قبلی را لغو کن.
+
+مثلاً:
+
+کاربر نوشت
+
+chi
+
+هنوز جواب نیامده.
+
+بعد سریع نوشت
+
+chicken
+
+پس دیگر درخواست
+
+chi
+
+به درد نمی‌خورد.
+
+لغوش می‌کنیم.
+new AbortController()
+signal چیست؟
+signal: searchController.signal
+
+یعنی
+
+اگر بعداً
+
+abort()
+
+صدا زده شد...
+
+این fetch متوقف شود.
+error یک Object است.
+name یکی از Propertyهای آن Object است.
+error.name یعنی نام نوع خطا.
+ما با بررسی آن تشخیص می‌دهیم که خطا واقعی است یا فقط به خاطر abort() ایجاد شده است.
+
+e.key         // کلیدی که زده شده
+e.code        // کد فیزیکی کلید (مثل KeyA)
+e.ctrlKey     // آیا Ctrl نگه داشته شده؟
+e.shiftKey    // آیا Shift نگه داشته شده؟
+e.altKey      // آیا Alt نگه داشته شده؟
+e.target      // عنصری که رویداد روی آن اتفاق افتاده
+e.type        // نوع رویداد (keydown)
+
+target
+
+closest()
+slice 
+some
+map
+join
+Set فقط مقادیر یکتا را نگه می‌دارد.
+unshift() چیست؟
+remove
+pop
+dataset
+delete چیست؟
